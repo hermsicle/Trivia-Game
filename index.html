@@ -17,11 +17,26 @@
         <div class="header">
             <h1>Totally Trivial Trivia!</h1>
         </div>
-        <button id = 'start'>Start</button>
-        <div id="time-remaining"></div>
-        <div class="quiz"></div>
-        <button id='submit'>Submit Answers</button>
-        <div id="results"></div>
+        <button id='start'>Start</button>
+        <div class="quiz" style='display: none;'>
+            <div id='timer'>
+                <div id='counter'>30</div>
+            </div>
+            <div id='question'>
+                <p>Question</p>
+            </div>
+            <div id='choices'>
+                <div class='choice' id='A' onclick="checkAnswer('A')">A</div>"
+                <div class='choice' id='B' onclick="checkAnswer('B')">B</div>"
+                <div class='choice' id='C' onclick="checkAnswer('C')">C</div>"
+                <div class='choice' id='D' onclick="checkAnswer('D')">D</div>"
+            </div>
+            <div class="score"></div>
+
+        </div>
+
+    </div>
+
     </div>
 
 
