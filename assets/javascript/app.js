@@ -1,94 +1,105 @@
-$(document).ready(function(){
+$(document).ready(function() {
+//Creating all our elements
+//Start the game when user clicks on start button
+$('#start').on('click', gameState.startTimer)
+
+});
+
+//Information about Game State
+var gameState = {
+    
+    //Setting the timer to 60 seconds when game starts
+    
+    timeRemaining: 60, 
+
+    //Start the timer, hide the start page, and show questions
+    startTimer: function() {
+        $('#timer').text('Time Remaining: ' + gameState.timeRemaining);
+        setInterval(gameState.countdown, 1000);
+        $('#start').hide();
+        trivia.displayQuestions();
+    },
+
+    //Decrement the timer and update the UI; stop the timer at 0;
+    countdown: function() {
+        gameState.timeRemaining--;
+        $('#timer').text('Time Remaining: ' + gameState.timeRemaining);
+        if (gameState.timeRemaining === 0) {
+            gameState.stopTimer();
+            $('#timer').empty();
+        }
+    },
+
+    //Stop the timer and check the answers
+    stopTimer: function() {
+        clearInterval() ;
+        trivia.checkAnswers() ;
+    },
+
+    //Hide the questions and display the end page with results
+
+
+
+}
+
+
+
+
+
 
 //Creating Questions
-let questions = [
+var questions = [
     {
         question: 'What does HTML stand for?',
-        choiceA: 'Hyper Text Markup Language',
-        choiceB: 'Home Tool Markup Language',
-        choiceC: 'Hyperlinks and Text Markup Language',
-        choiceD: 'Blue',
-        answer: 'A'
+        answers: ['Hyper Text Markup Language','Home Tool Markup Language','Hyperlinks and Text Markup Language','Blue'],
+        correct: 'Hyper Text Markup Language'
     },
     {
         question: "Choose the correct HTML tag for the largest heading:",
-        choiceA: 'Head',
-        choiceB: 'H1',
-        choiceC: 'H6' ,
-        choiceD: 'Heading',
-        answer: 'B'
+        answers: ['Head','H1','H6','Heading'],
+        correct: 'H1'
     },
     {
         question: "What is the correct HTML tag for inserting a line break?",
-        choiceA: 'break',
-        choiceB: 'br /br',
-        choiceC: 'lb',
-        choiceD: 'br/',
-        answer: 'D'
+        answers: ['break','br /br','lb','br/'],
+        correct: 'br/'
     },
     {
         question: "Choose the correct HTML tag to make a text bold  ",
-        choiceA: 'bold',
-        choiceB: 'b',
-        choiceC: 'bb',
-        choiceD: 'strong',
-        answer: 'A'
-        
+        answers: ['bold','b','bb','strong'],
+        correct: 'bold'
     },
     {
         question: "What does CSS stand for?",
-        choiceA: 'Creative Style Sheets',
-        choiceB: 'Colorful Style Sheets',
-        choiceC: 'Computing Style Sheets',
-        choiceD: 'Cascading Style Sheets',
-        answer: 'D'
+        answers: ['Creative Style Sheets','Colorful Style Sheets','Computing Style Sheets','Cascading Style Sheets'],
+        correct: 'Cascading Style Sheets'
     },
     {
         question: "How do you insert a comment in a CSS file?",
-        choiceA: "'this is a comment" ,
-        choiceB: '/*This is a comment */',
-        choiceC: '//This is a comment',
-        choiceD: '//This is a comment. //',
-        answer: 'B'
+        answers: ["'this is a comment" ,'/*This is a comment */','//This is a comment','//This is a comment. //'],
+        correct: '/*This is a comment */'
     },
     {
         question: "How do you change the text color of an element?",
-        choiceA: 'Color:',
-        choiceB: 'Text-Color:',
-        choiceC: 'Text-Color = ',
-        choiceD: 'Fgcolor:',
-        answer: 'A'
-        
+        answers: ['Color:','Text-Color:','Text-Color = ','Fgcolor:'],
+        correct: 'Color:'
     },
     {
         question: "Who created Javascript?",
-        choiceA: 'Microsoft',
-        choiceB: 'Sun Microsystems',
-        choiceC: 'Netscape',
-        choiceD: 'Oracle' ,
-        answer: 'C'
+        answers: ['Microsoft','Sun Microsystems','Netscape','Oracle' ,],
+        correct: 'Netscape'
     },
     {
         question: "What was Javascript called before it was ever called Javascript?",
-        choiceA: 'Latte',
-        choiceB: 'Mocha',
-        choiceC: 'Livescript',
-        choiceD: 'BScript',
-        answer: 'C'
+        answers: ['Latte','Mocha','Livescript','BScript'],
+        correct: 'Livescript'
     },
     {
         question: "What type of programming langauge is Javascript?",
-        choiceA: 'Front End',
-        choiceB: 'Back End',
-        choiceC: 'Full-Stack',
-        choiceD: 'None',
-        answer: 'C'
+        answers: ['Front End','Back End','Full-Stack','None',],
+        correct: 'Full-Stack'
     },
 ]
 
 
 
-
-
-
-});
