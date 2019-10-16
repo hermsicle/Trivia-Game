@@ -17,13 +17,15 @@
         <div class="header">
             <h1>Totally Trivial Trivia!</h1>
         </div>
-        <button id='start'>Start</button>
-        <div class="quiz" style='display: none;'>
+        <div class="startBtn">
+            <button id='start'>Start</button>
+        </div>
+        <div id="quiz" style='display: none;'>
             <div id='timer'>
                 <div id='counter'>60</div>
             </div>
             <div id='questions'></div>
-            <div class='hidden' id='end-page'>
+            <div id='end-page' style='display: none;'>
                 <h2>Here are your scores:</h2>
                 <p id='correct-answers'></p>
                 <p id='incorrect-answers'></p>
