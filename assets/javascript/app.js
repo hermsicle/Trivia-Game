@@ -2,17 +2,11 @@ $(document).ready(function () {
 
 
     //When start button is clicked, it shows the hidden questionaire
-    $('#start').on('click', function() {
-        $('.startBtn').hide();
+    $('#start').on('click', function () {
+        $('.startBtn').hide(); //Or could use $(this).hide()
         $('#quiz').show();
 
-
     })
-
-
-
-
-
 
 
 
@@ -51,7 +45,7 @@ $(document).ready(function () {
         //We pass the name of the interval to the clearInterval function
         clearInterval(intervalId);
     }
-run();
+    run();
 
 
 
@@ -60,11 +54,16 @@ run();
 
 
 
-
+    //Creating end page variables
+    var correctAnswer = 0;
+    var wrongAnswer = 0;
+    var unAnswered = 0;
+    var question = 0;
+    var userPick;       //for each time a user picks a possible answer
 
 
     //Creating Questions
-    var questions = [
+    var webQuestions = [
         {
             question: 'What does HTML stand for?',
             answers: ['Hyper Text Markup Language', 'Home Tool Markup Language', 'Hyperlinks and Text Markup Language', 'Blue'],
@@ -117,5 +116,27 @@ run();
         },
     ]
 
+    //Displaying the trivia game
+    function displayTrivia() {
+        $('#questions').html(webQuestions[0].question); //Picking the first object and asking the question
+        question++; //Increment quesion 
 
+        var answers = webQuestions[0].answers;
+        var correct = [ ];
+
+        //create a for loop to iterate through the possible answers
+        for (var i = 0; i < answers.length; i++) {
+            var button = $('<button>'); //creates a button 
+            button.text(answers[i]); //text of the possible answers
+            $('#possibleAnswers').append(button) //appends the button in the possibleAnswers id
+        }
+        $('#possibleAnswers').on('click', function (e) {  //click function 
+            userPick = $(this).data('id'); 
+            webQuestions[0].correct;
+            if (userPick != webQuestions[0].correct) {
+                correctAnswer++;
+            }
+        })
+    }
+    displayTrivia();
 });
