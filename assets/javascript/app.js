@@ -1,14 +1,11 @@
 $(document).ready(function () {
 
-
     //When start button is clicked, it shows the hidden questionaire
     $('#start').on('click', function () {
         $('.startBtn').hide(); //Or could use $(this).hide()
         $('#quiz').show();
 
     })
-
-
 
     //Set our number counter to 60.
     var number = 60;
@@ -46,11 +43,6 @@ $(document).ready(function () {
         clearInterval(intervalId);
     }
     run();
-
-
-
-
-
 
 
 
@@ -114,15 +106,37 @@ $(document).ready(function () {
             answers: ['Front End', 'Back End', 'Full-Stack', 'None',],
             correct: 'Full-Stack'
         },
-    ]
+    ];
 
+
+    /*
+    function trivia() {
+        for (var j = 0; j < webQuestions.length; j++) {
+            var Question = webQuestions[j].question;
+            $('#Question').append( webQuestions[j].question )
+            
+            
+            var options = webQuestions[j].answers;
+    
+            $('#possibleAnswers').append( webQuestions[j].answers )
+
+        }
+    }
+    trivia();
+    */
+
+   console.log(webQuestions);
+   for(var i = 0; i < webQuestions.length; i++){
+       $('#Question').append(`<h5> ${webQuestions[i].question}</h5>`,`<h5> ${webQuestions[i].answers}</h5>`)
+   }
+   /*
     //Displaying the trivia game
     function displayTrivia() {
-        $('#questions').html(webQuestions[0].question); //Picking the first object and asking the question
+        $('#questions').html(webQuestions[0].question); //Show the first question in the object
         question++; //Increment quesion 
 
         var answers = webQuestions[0].answers;
-        var correct = [ ];
+        var buttonArr = [];
 
         //create a for loop to iterate through the possible answers
         for (var i = 0; i < answers.length; i++) {
@@ -130,13 +144,16 @@ $(document).ready(function () {
             button.text(answers[i]); //text of the possible answers
             $('#possibleAnswers').append(button) //appends the button in the possibleAnswers id
         }
-        $('#possibleAnswers').on('click', function (e) {  //click function 
-            userPick = $(this).data('id'); 
+        $('#possibleAnswers').on('click', function () {  //click function 
+            userPick = $(this).data('id');
             webQuestions[0].correct;
             if (userPick != webQuestions[0].correct) {
+                wrongAnswer++;
+            } else {
                 correctAnswer++;
             }
         })
     }
     displayTrivia();
+    */
 });

@@ -28,7 +28,13 @@
     font-size: 30px;
 
 }
+#Question {
+    padding-top: 15px;
+}
 
+#possibleAnswers {
+    padding-top: 15px;
+}
 
 body {
     background-image: url(../images/trivia-tuesdays-background.jpg);
