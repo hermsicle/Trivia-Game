@@ -4,32 +4,24 @@ $(document).ready(function () {
     $('#start').on('click', function () {
         $('.startBtn').hide(); //Or could use $(this).hide()
         $('#quiz').show();
-
     })
-
     //Set our number counter to 60.
     var number = 60;
-
     //variable that will hold our intervalID when we execute 
     //the 'run' function
     var intervalId;
-
     //The run function is setting an interval
     function run() {
         clearInterval(intervalId);
         intervalId = setInterval(decrement, 1000);
     }
-
     //The decrement function
     function decrement() {
         number--; //this is decrementing the number var by 1
-
         //show the number being decremented in html
         $('#counter').html("<h2> Time Remaining: " + number + "<h2>");
-
         //Once the number hits zero....
         if (number === 0) {
-
             // run the 'stop' function, or in this case, run the function where takes us to the
             //number of questions answered right, wrong, and unanswered.
             stop();
@@ -52,7 +44,6 @@ $(document).ready(function () {
     var unAnswered = 0;
     var question = 0;
     var userPick;       //for each time a user picks a possible answer
-
 
     //Creating Questions
     var webQuestions = [
@@ -108,52 +99,29 @@ $(document).ready(function () {
         },
     ];
 
+var questionContainer = $('#Question');     //Assigning this var to the question Id.
+var answerGroup = $('#possibleAnswers');    
+questionContainer.append('<h2>Answer the following Questions!</h2>')    
 
-    /*
-    function trivia() {
-        for (var j = 0; j < webQuestions.length; j++) {
-            var Question = webQuestions[j].question;
-            $('#Question').append( webQuestions[j].question )
-            
-            
-            var options = webQuestions[j].answers;
-    
-            $('#possibleAnswers').append( webQuestions[j].answers )
+    for (var i = 0; i < webQuestions.length; i++) {
+        questionContainer.append('<div id="question">' + webQuestions[i].question + '</div>');  
 
-        }
+        var answer1 = webQuestions[i].answers[0];
+        var answer2 = webQuestions[i].answers[1];
+        var answer3 = webQuestions[i].answers[2];
+        var answer4 = webQuestions[i].answers[3];
+
+        //Creates the radio button.
+        questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i +'" id="radio'+i+'"><label class="form-check-label" id="radio'+i+'label" for="radio'+i+'">'+ answer1 + '</label></div>')
+        questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i +'" id="radio'+i+'"><label class="form-check-label" id="radio'+i+'label" for="radio'+i+'">'+ answer2 + '</label></div>')
+        questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i +'" id="radio'+i+'"><label class="form-check-label" id="radio'+i+'label" for="radio'+i+'">'+ answer3 + '</label></div>')
+        questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i +'" id="radio'+i+'"><label class="form-check-label" id="radio'+i+'label" for="radio'+i+'">'+ answer4 + '</label></div>')
+
+
+        //$('#Question').append(`<h3> ${webQuestions[i].question}</h3>`, `<h5 >${webQuestions[i].answers} </h5>`)   //Shows all the questions and possible answers with no radio button
     }
-    trivia();
-    */
+}
 
-   console.log(webQuestions);
-   for(var i = 0; i < webQuestions.length; i++){
-       $('#Question').append(`<h5> ${webQuestions[i].question}</h5>`,`<h5> ${webQuestions[i].answers}</h5>`)
-   }
-   /*
-    //Displaying the trivia game
-    function displayTrivia() {
-        $('#questions').html(webQuestions[0].question); //Show the first question in the object
-        question++; //Increment quesion 
 
-        var answers = webQuestions[0].answers;
-        var buttonArr = [];
 
-        //create a for loop to iterate through the possible answers
-        for (var i = 0; i < answers.length; i++) {
-            var button = $('<button>'); //creates a button 
-            button.text(answers[i]); //text of the possible answers
-            $('#possibleAnswers').append(button) //appends the button in the possibleAnswers id
-        }
-        $('#possibleAnswers').on('click', function () {  //click function 
-            userPick = $(this).data('id');
-            webQuestions[0].correct;
-            if (userPick != webQuestions[0].correct) {
-                wrongAnswer++;
-            } else {
-                correctAnswer++;
-            }
-        })
-    }
-    displayTrivia();
-    */
-});
+);

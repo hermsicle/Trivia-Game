@@ -31,7 +31,15 @@
 #Question {
     padding-top: 15px;
 }
-
+h3 {
+    margin-top:10px;
+}
+h5 {
+    margin-top: 10px;
+}
+#radioBtn {
+    display: button;
+}
 #possibleAnswers {
     padding-top: 15px;
 }
