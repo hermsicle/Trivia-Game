@@ -1,10 +1,14 @@
 $(document).ready(function () {
 
-    //When start button is clicked, it shows the hidden questionaire
+
+    //Start the game when the button is clicked
+
     $('#start').on('click', function () {
         $('.startBtn').hide(); //Or could use $(this).hide()
         $('#quiz').show();
     })
+
+
     //Set our number counter to 60.
     var number = 60;
     //variable that will hold our intervalID when we execute 
@@ -14,7 +18,7 @@ $(document).ready(function () {
     function run() {
         clearInterval(intervalId);
         intervalId = setInterval(decrement, 1000);
-    }
+    } run();
     //The decrement function
     function decrement() {
         number--; //this is decrementing the number var by 1
@@ -22,79 +26,10 @@ $(document).ready(function () {
         $('#counter').html("<h2> Time Remaining: " + number + "<h2>");
         //Once the number hits zero....
         if (number === 0) {
-            $('#end-page').show();
-            // run the 'stop' function, or in this case, run the function where takes us to the
-            //number of questions answered right, wrong, and unanswered.
-            stop();
+            showEndPage();
         }
     }
-    //Here we put the 'stop' function:
-    function stop() {
 
-        //Clears our intervalId
-        //We pass the name of the interval to the clearInterval function
-        clearInterval(intervalId);
-    }
-    run();
-
-
-    //Creating Questions
-    var webQuestions = [
-        {
-            question: 'What does HTML stand for?',
-            answers: ['Hyper Text Markup Language', 'Home Tool Markup Language', 'Hyperlinks and Text Markup Language', 'Blue'],
-            correct: 'Hyper Text Markup Language'
-        },
-        {
-            question: "Choose the correct HTML tag for the largest heading:",
-            answers: ['Head', 'H1', 'H6', 'Heading'],
-            correct: 'H1'
-        },
-        {
-            question: "What is the correct HTML tag for inserting a line break?",
-            answers: ['break', 'br /br', 'lb', 'br/'],
-            correct: 'br/'
-        },
-        {
-            question: "Choose the correct HTML tag to make a text bold  ",
-            answers: ['bold', 'b', 'bb', 'strong'],
-            correct: 'bold'
-        },
-        {
-            question: "What does CSS stand for?",
-            answers: ['Creative Style Sheets', 'Colorful Style Sheets', 'Computing Style Sheets', 'Cascading Style Sheets'],
-            correct: 'Cascading Style Sheets'
-        },
-        {
-            question: "How do you insert a comment in a CSS file?",
-            answers: ["'this is a comment", '/*This is a comment */', '//This is a comment', '//This is a comment. //'],
-            correct: '/*This is a comment */'
-        },
-        {
-            question: "How do you change the text color of an element?",
-            answers: ['Color:', 'Text-Color:', 'Text-Color = ', 'Fgcolor:'],
-            correct: 'Color:'
-        },
-        {
-            question: "Who created Javascript?",
-            answers: ['Microsoft', 'Sun Microsystems', 'Netscape', 'Oracle',],
-            correct: 'Netscape'
-        },
-        {
-            question: "What was Javascript called before it was ever called Javascript?",
-            answers: ['Latte', 'Mocha', 'Livescript', 'BScript'],
-            correct: 'Livescript'
-        },
-        {
-            question: "What type of programming langauge is Javascript?",
-            answers: ['Front End', 'Back End', 'Full-Stack', 'None',],
-            correct: 'Full-Stack'
-        },
-    ];
-
-    function trivia() {
-
-    }
     var questionContainer = $('#Question');     //Assigning this var to the question Id.
     var answerGroup = $('#possibleAnswers');
     questionContainer.append('<h2>Answer the following Questions!</h2>')
@@ -144,9 +79,7 @@ $(document).ready(function () {
                     numIncorrect++;
                 }
             }
-            checkAnswers();
         }
-
         //show end page with correct, incorrect, and unanswered 
         function showEndPage() {
             $('#end-page').show();
@@ -157,8 +90,62 @@ $(document).ready(function () {
             $('#wrongAnswer').append("Incorrect Answers: " + numIncorrect);
             $('#unAnswered').append("Unanswered Questions: " + numUnanswered);
         }
-        showEndPage();
     }
+    checkAnswers();
 
 })
+
+//Creating Questions
+var webQuestions = [
+    {
+        question: 'What does HTML stand for?',
+        answers: ['Hyper Text Markup Language', 'Home Tool Markup Language', 'Hyperlinks and Text Markup Language', 'Blue'],
+        correct: 'Hyper Text Markup Language'
+    },
+    {
+        question: "Choose the correct HTML tag for the largest heading:",
+        answers: ['Head', 'H1', 'H6', 'Heading'],
+        correct: 'H1'
+    },
+    {
+        question: "What is the correct HTML tag for inserting a line break?",
+        answers: ['break', 'br /br', 'lb', 'br/'],
+        correct: 'br/'
+    },
+    {
+        question: "Choose the correct HTML tag to make a text bold  ",
+        answers: ['bold', 'b', 'bb', 'strong'],
+        correct: 'bold'
+    },
+    {
+        question: "What does CSS stand for?",
+        answers: ['Creative Style Sheets', 'Colorful Style Sheets', 'Computing Style Sheets', 'Cascading Style Sheets'],
+        correct: 'Cascading Style Sheets'
+    },
+    {
+        question: "How do you insert a comment in a CSS file?",
+        answers: ["'this is a comment", '/*This is a comment */', '//This is a comment', '//This is a comment. //'],
+        correct: '/*This is a comment */'
+    },
+    {
+        question: "How do you change the text color of an element?",
+        answers: ['Color:', 'Text-Color:', 'Text-Color = ', 'Fgcolor:'],
+        correct: 'Color:'
+    },
+    {
+        question: "Who created Javascript?",
+        answers: ['Microsoft', 'Sun Microsystems', 'Netscape', 'Oracle',],
+        correct: 'Netscape'
+    },
+    {
+        question: "What was Javascript called before it was ever called Javascript?",
+        answers: ['Latte', 'Mocha', 'Livescript', 'BScript'],
+        correct: 'Livescript'
+    },
+    {
+        question: "What type of programming langauge is Javascript?",
+        answers: ['Front End', 'Back End', 'Full-Stack', 'None',],
+        correct: 'Full-Stack'
+    },
+];
 
