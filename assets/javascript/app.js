@@ -22,6 +22,7 @@ $(document).ready(function () {
         $('#counter').html("<h2> Time Remaining: " + number + "<h2>");
         //Once the number hits zero....
         if (number === 0) {
+            $('#end-page').show();
             // run the 'stop' function, or in this case, run the function where takes us to the
             //number of questions answered right, wrong, and unanswered.
             stop();
@@ -36,14 +37,6 @@ $(document).ready(function () {
     }
     run();
 
-
-
-    //Creating end page variables
-    var correctAnswer = 0;
-    var wrongAnswer = 0;
-    var unAnswered = 0;
-    var question = 0;
-    var userPick;       //for each time a user picks a possible answer
 
     //Creating Questions
     var webQuestions = [
@@ -99,12 +92,15 @@ $(document).ready(function () {
         },
     ];
 
-var questionContainer = $('#Question');     //Assigning this var to the question Id.
-var answerGroup = $('#possibleAnswers');    
-questionContainer.append('<h2>Answer the following Questions!</h2>')    
+    function trivia() {
+
+    }
+    var questionContainer = $('#Question');     //Assigning this var to the question Id.
+    var answerGroup = $('#possibleAnswers');
+    questionContainer.append('<h2>Answer the following Questions!</h2>')
 
     for (var i = 0; i < webQuestions.length; i++) {
-        questionContainer.append('<div id="question">' + webQuestions[i].question + '</div>');  
+        questionContainer.append('<div id="question">' + webQuestions[i].question + '</div>');
 
         var answer1 = webQuestions[i].answers[0];
         var answer2 = webQuestions[i].answers[1];
@@ -112,16 +108,57 @@ questionContainer.append('<h2>Answer the following Questions!</h2>')
         var answer4 = webQuestions[i].answers[3];
 
         //Creates the radio button.
-        questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i +'" id="radio'+i+'"><label class="form-check-label" id="radio'+i+'label" for="radio'+i+'">'+ answer1 + '</label></div>')
-        questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i +'" id="radio'+i+'"><label class="form-check-label" id="radio'+i+'label" for="radio'+i+'">'+ answer2 + '</label></div>')
-        questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i +'" id="radio'+i+'"><label class="form-check-label" id="radio'+i+'label" for="radio'+i+'">'+ answer3 + '</label></div>')
-        questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i +'" id="radio'+i+'"><label class="form-check-label" id="radio'+i+'label" for="radio'+i+'">'+ answer4 + '</label></div>')
+        questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + answer1 + '</label></div>')
+        questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + answer2 + '</label></div>')
+        questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + answer3 + '</label></div>')
+        questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + answer4 + '</label></div>')
 
 
         //$('#Question').append(`<h3> ${webQuestions[i].question}</h3>`, `<h5 >${webQuestions[i].answers} </h5>`)   //Shows all the questions and possible answers with no radio button
     }
-}
+
+    //add a done button at the end of the page 
+    var doneBtn = '<button class=" btn btn-primary" id="done-button" type="submit">Done</button>';
+    questionContainer.append(doneBtn);
 
 
+    //function to check if questions are correct 
+    function checkAnswers() {
+        var correctAnswer;
+        var userAnswer;
+        var numIncorrect = 0;
+        var numUnanswered = 0;
+        var numCorrect = 0;
 
-);
+        //loop through the possible answers 
+        //increment the scores
+        for (var i = 0; i < webQuestions.length; i++) {
+            correctAnswer = webQuestions[i].answers;
+            userAnswer = $('input[id=radio' + i + ']:checked + label').text();
+            if (userAnswer === correctAnswer) {
+                numCorrect++;
+            } else if (userAnswer === "") {
+                numUnanswered++;
+            } else if (userAnswer !== correctAnswer) {
+                {
+                    numIncorrect++;
+                }
+            }
+            checkAnswers();
+        }
+
+        //show end page with correct, incorrect, and unanswered 
+        function showEndPage() {
+            $('#end-page').show();
+            $('#Question').hide();
+            $('#counter').empty();
+            $('#counter').hide();
+            $('#correctAnswer').append("Correct Answers: " + numCorrect);
+            $('#wrongAnswer').append("Incorrect Answers: " + numIncorrect);
+            $('#unAnswered').append("Unanswered Questions: " + numUnanswered);
+        }
+        showEndPage();
+    }
+
+})
+
