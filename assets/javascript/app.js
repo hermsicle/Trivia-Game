@@ -3,96 +3,99 @@ $(document).ready(function () {
     //Start the game when the button is clicked
 
     $('.startBtn').on('click', gameStart.startTimer);
+    
 });
 
 
 var gameStart = {
 
-        timeRemaining: 60,
+    timeRemaining: 60,
 
-        startTimer: function () {
-            $('#counter').text("Time Remaining: " + gameStart.timeRemaining);
-            setInterval(gameStart.countdown, 1000);
-            $('#startPage').hide();
-            trivia.displayQuestions();
-        },
+    startTimer: function () {
+        $('#counter').text("Time Remaining: " + gameStart.timeRemaining);
+        setInterval(gameStart.countdown, 1000);
+        $('#start').hide();
+        trivia.displayQuestions();
+    },
 
-        countdown: function () {
-            gameStart.timeRemaining--;
-            $('#counter').text("Time Remaining: " + gameStart.timeRemaining );
-            if (gameStart.timeRemaining === 0) {
-                gameStart.stopTimer();
-                $('#counter').empty();
-            }
-        },
-
-        stopTimer: function () {
-            clearInterval();
-            trivia.checkAnswers();
-        },
-
-        showEndPage: function (numCorrect, numIncorrect, numUnanswered) {
-            $('#end-page').show();
-            $('#quiz').hide();
+    countdown: function () {
+        gameStart.timeRemaining--;
+        $('#counter').text("Time Remaining: " + gameStart.timeRemaining);
+        if (gameStart.timeRemaining === 0) {
+            gameStart.stopTimer();
             $('#counter').empty();
-            $('#counter').hide();
-            $('#correctAnswer').append("Correct Answers: " + numCorrect);
-            $('#wrongAnswer').append("Incorrect Answers: " + numIncorrect);
-            $('#unAnswered').append("Unanswered Questions: " + numUnanswered);
         }
+    },
+
+    stopTimer: function () {
+        clearInterval();
+        trivia.checkAnswers();
+    },
+
+    showEndPage: function (numCorrect, numIncorrect, numUnanswered) {
+        $('#end-page').show();
+        $('#quiz').hide();
+        $('#counter').empty();
+        $('#counter').hide();
+        $('#correctAnswer').append("Correct Answers: " + numCorrect);
+        $('#wrongAnswer').append("Incorrect Answers: " + numIncorrect);
+        $('#unAnswered').append("Unanswered Questions: " + numUnanswered);
     }
+}
 
-    var trivia = {
+var trivia = {
 
-        displayQuestions: function () {
-            var questionContainer = $('#Question');     //Assigning this var to the question Id.
-            var answerGroup = $('#possibleAnswers');
-            questionContainer.append('<h2>Answer the following Questions!</h2>')
+    displayQuestions: function () {
+        var questionContainer = $('#Question');
+        var answerGroup = $('#possibleAnswers');
+        questionContainer.append('<h2>Answer the following Questions!</h2>')
 
-            for (var i = 0; i < webQuestions.length; i++) {
+        for (var i = 0; i < webQuestions.length; i++) {
 
-                questionContainer.append('<div id="question">' + webQuestions[i].question + '</div>');
+            questionContainer.append('<div id="question">' + webQuestions[i].question + '</div>');
 
-                var answer1 = webQuestions[i].answers[0];
-                var answer2 = webQuestions[i].answers[1];
-                var answer3 = webQuestions[i].answers[2];
-                var answer4 = webQuestions[i].answers[3];
+            var answer1 = webQuestions[i].answers[0];
+            var answer2 = webQuestions[i].answers[1];
+            var answer3 = webQuestions[i].answers[2];
+            var answer4 = webQuestions[i].answers[3];
 
-                //Creates the radio button.
-                questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + answer1 + '</label></div>')
-                questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + answer2 + '</label></div>')
-                questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + answer3 + '</label></div>')
-                questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + answer4 + '</label></div>')
+            //Creates the radio button.
+            questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + answer1 + '</label></div>')
+            questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + answer2 + '</label></div>')
+            questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + answer3 + '</label></div>')
+            questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + answer4 + '</label></div>')
+        }
+        var doneBtn = '<button class=" btn btn-primary" id="done-button" type="submit">Done</button>';
+        questionContainer.append(doneBtn);
+        $('#dont-button').on('click', gameStart.stopTimer);
+    },
+    checkAnswers: function () {
+        var correctAnswer;
+        var userAnswer;
+        var numIncorrect = 0;
+        var numUnanswered = 0;
+        var numCorrect = 0;
+
+        for (var i = 0; i < webQuestions.length; i++) {
+            correctAnswer = webQuestions[i].correct;
+            userAnswer = $('input[id=radio' + i + ']:checked + label').text();
+
+            if (userAnswer === correctAnswer) {
+                numCorrect++;
+            } else if (userAnswer === "") {
+                numUnanswered++;
+            } else if (userAnswer !== correctAnswer) {
+                {
+                    numIncorrect++;
+                }
             }
-            var doneBtn = '<button class=" btn btn-primary" id="done-button" type="submit">Done</button>';
-            questionContainer.append(doneBtn);
-            $('#dont-button').on('click', gameStart.stopTimer);
-        },
-        checkAnswers: function () {
-                var correctAnswer;
-                var userAnswer;
-                var numIncorrect = 0;
-                var numUnanswered = 0;
-                var numCorrect = 0;
+        }
+        gameStart.showEndPage(numCorrect, numIncorrect, numUnanswered);
+    },
 
-                for (var i = 0; i < webQuestions.length; i++) {
-                    correctAnswer = webQuestions[i].answers;
-                    userAnswer = $('input[id=radio' + i + ']:checked + label').text();
+}
 
-                    if (userAnswer === correctAnswer) {
-                        numCorrect++;
-                    } else if (userAnswer === "") {
-                        numUnanswered++;
-                    } else if (userAnswer !== correctAnswer) {
-                            numIncorrect++;
-                        }
-                    }
-                    gameStart.showEndPage(numCorrect, numIncorrect, numUnanswered);
-                },
-                
-            }
-        
-        
+
 //Creating Questions
 var webQuestions = [
     {
