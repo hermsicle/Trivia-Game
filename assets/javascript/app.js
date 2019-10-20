@@ -65,9 +65,10 @@ var trivia = {
             questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + answer3 + '</label></div>')
             questionContainer.append('<div class ="form-check"><input class = "form-check-input" type="radio" name="radio-group' + i + '" id="radio' + i + '"><label class="form-check-label" id="radio' + i + 'label" for="radio' + i + '">' + answer4 + '</label></div>')
         }
+
         var doneBtn = '<button class=" btn btn-primary" id="done-button" type="submit">Done</button>';
         questionContainer.append(doneBtn);
-        $('#dont-button').on('click', gameStart.stopTimer);
+        $('#done-button').on('click', gameStart.stopTimer);
     },
     checkAnswers: function () {
         var correctAnswer;
