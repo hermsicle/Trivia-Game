@@ -34,7 +34,7 @@ var gameStart = {
 
     showEndPage: function (numCorrect, numIncorrect, numUnanswered) {
         $('#end-page').show();
-        $('#quiz').hide();
+        $('#Question').empty();
         $('#counter').empty();
         $('#counter').hide();
         $('#correctAnswer').append("Correct Answers: " + numCorrect);
