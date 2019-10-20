@@ -8,14 +8,16 @@
     margin: 0 auto;
     width: 850px;
     background-color: yellow;
+
 }
 
 .header {
     color: blue;
     padding: 50px;
     font-size: 25px;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Fascinate Inline', cursive;
 }
+
 #start {
     width: 200px;
     height: 50px;
@@ -30,11 +32,9 @@
 #Question {
     padding-top: 15px;
 }
-h3 {
-    margin-top:10px;
-}
-h5 {
-    margin-top: 10px;
+
+h2 {
+    font-size: 18px;
 }
 #radioBtn {
     display: button;
@@ -42,7 +42,30 @@ h5 {
 #possibleAnswers {
     padding-top: 15px;
 }
-
+#question{
+    font-family: 'Fascinate Inline', cursive;
+    font-size: 20px;
+    margin-top: 15px;
+    color: blue;
+    font-weight: bold;
+}
+.form-check {
+    font-size: 18px;
+}
+#done-button {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    width: 100px;
+    height: 30px;
+    font-size: 15px;
+}
+#correctAnswer, #wrongAnswer, #unAnswered {
+    font-family: 'Fascinate Inline', cursive;
+    font-size: 20px;
+    margin-top: 10px;
+    color: blue;
+    font-weight: bold;
+}
 body {
     background-image: url(../images/trivia-tuesdays-background.jpg);
 }
